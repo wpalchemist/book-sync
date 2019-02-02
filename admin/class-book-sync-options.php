@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin settings.
  *
@@ -127,6 +126,7 @@ class Book_Sync_Options {
 			'book_sync_settings',
 			'book_sync_settings_section',
 			array(
+				// translators: URL for finding user key on LibraryThing.com
 				sprintf( __( 'To find your LibraryThing user key, go to <a href="%s" target="_blank">LibraryThing</a>.  In the code on that page, you will see "key=XXXXXXXXXX": that is your user key.', 'book-sync' ), 'http://www.librarything.com/api/json.php' )
 			)
 		);
@@ -136,7 +136,7 @@ class Book_Sync_Options {
 	/**
 	 * Display the Librarything username field
 	 *
-	 * @args array
+	 * @param $args array
 	 * @since 1.0.0
 	 */
 	public function librarything_username_render( $args ) {
@@ -150,7 +150,7 @@ class Book_Sync_Options {
 	/**
 	 * Display the LibraryThing user key field
 	 *
-	 * @param $args
+	 * @param $args array
 	 * @since 1.0.0
 	 */
 	public function librarything_user_key_render( $args ) {
@@ -165,7 +165,7 @@ class Book_Sync_Options {
 	 * Sanitize the settings
 	 *
 	 * @since 1.0.0
-	 * @param $input
+	 * @param $input array
 	 * @return mixed
 	 */
 	private function sanitize_settings( $input ) {
@@ -197,7 +197,6 @@ class Book_Sync_Options {
 	public function options_page(  ) {
 		?>
 		<h2><?php esc_attr_e( 'Book Sync', 'book-sync' ); ?></h2>
-		<?php //settings_errors(); ?>
 		<form action='options.php' method='post'>
 
 			<?php

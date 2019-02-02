@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,7 +23,7 @@
  * @subpackage Book_Sync/includes
  * @author     Morgan Kay <morgan@wpalchemists.com>
  */
-class Book_Sync_i18n {
+class Book_Sync_I18n {
 
 
 	/**
