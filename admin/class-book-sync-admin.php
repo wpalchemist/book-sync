@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -100,6 +99,11 @@ class Book_Sync_Admin {
 
 	}
 
+	/**
+	 * Register the Book custom post type
+	 *
+	 * @since 1.0.0
+	 */
 	public function register_cpt_book() {
 
 		$labels = array(
