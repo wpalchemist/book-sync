@@ -117,6 +117,11 @@ class Book_Sync {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-book-sync-admin.php';
 
 		/**
+		 * The class responsible for the plugin settings.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-book-sync-options.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -157,6 +162,11 @@ class Book_Sync {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_cpt_book', 0 );
+
+		$plugin_options = new Book_Sync_Options( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'admin_menu', $plugin_options, 'menu_page' );
+		$this->loader->add_action( 'admin_init', $plugin_options, 'settings_init' );
 
 	}
 
