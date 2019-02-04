@@ -121,6 +121,11 @@ class Book_Sync {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-book-sync-options.php';
 
 		/**
+		 * The class responsible for CLI commands.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-book-sync-cli.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
