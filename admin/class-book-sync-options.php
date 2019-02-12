@@ -39,11 +39,11 @@ class Book_Sync_Options {
 	private $version;
 
 	/**
-	 * The version of this plugin.
+	 * The plugin options.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string    $version    The options for this plugin.
 	 */
 	private $options;
 
@@ -70,7 +70,7 @@ class Book_Sync_Options {
 	 */
 	public function get_options() {
 		$defaults = array(
-			'librarything_api_key' => '',
+			'librarything_username' => '',
 			'librarything_user_key' => ''
 		);
 		$options = wp_parse_args( get_option( 'book_sync_settings' ), $defaults );
