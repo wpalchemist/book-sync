@@ -30,7 +30,7 @@
     "installer-paths": {
       "content/plugins/{$name}/": [
         "type:wordpress-plugin"
-      ],
+      ]
     }
   }
 }
