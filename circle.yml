@@ -76,7 +76,7 @@ jobs:
             # Run phpcs
             - run:
                 name: "Run phpcs"
-                command: ~/php-codesniffer/bin/phpcs -p --extensions=php --standard=./phpcs.ruleset.xml ./ -v -q
+                command: ~/php-codesniffer/bin/phpcs -p --extensions=php --standard=WordPress ./ -v -q
 
             # Teardown
             - store_test_results:
