@@ -76,6 +76,8 @@ jobs:
             # Run phpcs
             - run:
                 name: "Run phpcs"
+                command: composer global require wp-coding-standards/wpcs
+                command: phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
                 command: ~/php-codesniffer/bin/phpcs -p --extensions=php --standard=WordPress ./ -v -q
 
             # Teardown
