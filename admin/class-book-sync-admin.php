@@ -43,13 +43,13 @@ class Book_Sync_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -135,26 +135,26 @@ class Book_Sync_Admin {
 			'items_list_navigation' => __( 'Books list navigation', 'book-sync' ),
 			'filter_items_list'     => __( 'Filter Books list', 'book-sync' ),
 		);
-		$args = array(
-			'label'                 => __( 'Book', 'book-sync' ),
-			'description'           => __( 'Books in your collection', 'book-sync' ),
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions' ),
-			'taxonomies'            => array( 'author', 'collection', 'book-tag' ),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 5,
-			'menu_icon'             => 'dashicons-book',
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => true,
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capability_type'       => 'page',
-			'show_in_rest'          => true,
+		$args   = array(
+			'label'               => __( 'Book', 'book-sync' ),
+			'description'         => __( 'Books in your collection', 'book-sync' ),
+			'labels'              => $labels,
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+			'taxonomies'          => array( 'author', 'collection', 'book-tag' ),
+			'hierarchical'        => false,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => true,
+			'menu_position'       => 5,
+			'menu_icon'           => 'dashicons-book',
+			'show_in_admin_bar'   => true,
+			'show_in_nav_menus'   => true,
+			'can_export'          => true,
+			'has_archive'         => true,
+			'exclude_from_search' => false,
+			'publicly_queryable'  => true,
+			'capability_type'     => 'page',
+			'show_in_rest'        => true,
 		);
 		register_post_type( 'book', $args );
 
