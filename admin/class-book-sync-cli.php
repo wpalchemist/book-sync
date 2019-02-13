@@ -133,7 +133,9 @@ class Book_Sync_Cli extends WP_CLI_Command {
 				'lt_id'       => $book->book_id,
 				'title'       => $book->title,
 				'author'      => $book->author_lf,
-				'ISBN'        => $book->ISBN,
+				// phpcs:disable
+				'isbn'        => $book->ISBN,
+				// phpcs:enable
 				'publication' => $book->publicationdate,
 				'rating'      => $book->rating,
 				'cover'       => $book->cover,
