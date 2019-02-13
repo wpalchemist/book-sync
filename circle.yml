@@ -63,11 +63,11 @@ jobs:
                 name: "Run PHP Lint"
                 command: find -L ./ -name '*.php' -not -path './wordpress/*' -print0 | xargs -0 -n 1 -P 4 php -l > /dev/null
 
-            - run:
-                name: "Prepare test database"
-                command: |
-                    sudo mysql -uroot mysql -e "UPDATE user SET plugin='mysql_native_password' WHERE User='root'; FLUSH PRIVILEGES"
-                    bash .bin/circleci/install-wp-tests.sh "wp_tests" "root" "" "127.0.0.1"
+#            - run:
+#                name: "Prepare test database"
+#                command: |
+#                    sudo mysql -uroot mysql -e "UPDATE user SET plugin='mysql_native_password' WHERE User='root'; FLUSH PRIVILEGES"
+#                    bash .bin/circleci/install-wp-tests.sh "wp_tests" "root" "" "127.0.0.1"
 #            - run:
 #                name: "Run PHPUnit"
 #                command: |
@@ -76,10 +76,13 @@ jobs:
             # Run phpcs
             - run:
                 name: "Run phpcs"
-                command: ~/php-codesniffer/bin/phpcs -p --extensions=php --standard=./phpcs.ruleset.xml ./ -v -q
+                command: |
+                    composer global require wp-coding-standards/wpcs
+                    ~/php-codesniffer/bin/phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+                    ~/php-codesniffer/bin/phpcs -p --extensions=php --standard=WordPress ./ -v -q
 
             # Teardown
             - store_test_results:
                 path: ~/phpunit
             - store_artifacts:
-path: ~/phpunit
+                path: ~/phpunit
