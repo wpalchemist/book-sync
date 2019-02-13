@@ -79,7 +79,7 @@ jobs:
                 command: |
                     composer global require wp-coding-standards/wpcs
                     ~/php-codesniffer/bin/phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
-                    ~/php-codesniffer/bin/phpcs -p --extensions=php --standard=WordPress --ignore=*/lib/*,*/vendor/*  ./ -v -q
+                    ~/php-codesniffer/bin/phpcs -p --extensions=php --standard=WordPress --ignore=*/lib/*,*/vendor/* ./ -v -q
 
             # Teardown
             - store_test_results:
