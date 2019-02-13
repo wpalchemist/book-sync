@@ -51,14 +51,14 @@ class Book_Sync_Options {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-		$this->options = $this->get_options();
+		$this->version     = $version;
+		$this->options     = $this->get_options();
 
 	}
 
@@ -71,9 +71,9 @@ class Book_Sync_Options {
 	public function get_options() {
 		$defaults = array(
 			'librarything_username' => '',
-			'librarything_user_key' => ''
+			'librarything_user_key' => '',
 		);
-		$options = wp_parse_args( get_option( 'book_sync_settings' ), $defaults );
+		$options  = wp_parse_args( get_option( 'book_sync_settings' ), $defaults );
 		return $options;
 	}
 
@@ -115,7 +115,7 @@ class Book_Sync_Options {
 			'book_sync_settings',
 			'book_sync_settings_section',
 			array(
-				esc_attr__( 'Enter your LibraryThing username', 'book-sync' )
+				esc_attr__( 'Enter your LibraryThing username', 'book-sync' ),
 			)
 		);
 
@@ -127,7 +127,7 @@ class Book_Sync_Options {
 			'book_sync_settings_section',
 			array(
 				// translators: URL for finding user key on LibraryThing.com
-				sprintf( __( 'To find your LibraryThing user key, go to <a href="%s" target="_blank">LibraryThing</a>.  In the code on that page, you will see "key=XXXXXXXXXX": that is your user key.', 'book-sync' ), 'http://www.librarything.com/api/json.php' )
+				sprintf( __( 'To find your LibraryThing user key, go to <a href="%s" target="_blank">LibraryThing</a>.  In the code on that page, you will see "key=XXXXXXXXXX": that is your user key.', 'book-sync' ), 'http://www.librarything.com/api/json.php' ),
 			)
 		);
 
@@ -185,7 +185,7 @@ class Book_Sync_Options {
 	 *
 	 * @since 1.0.0
 	 */
-	public function settings_section_callback(  ) {
+	public function settings_section_callback() {
 		esc_attr_e( 'Enter your LibraryThing and Goodreads credentials to sync your libraries.', 'book-sync' );
 	}
 
@@ -194,7 +194,7 @@ class Book_Sync_Options {
 	 *
 	 * @since 1.0.0
 	 */
-	public function options_page(  ) {
+	public function options_page() {
 		?>
 		<h2><?php esc_attr_e( 'Book Sync', 'book-sync' ); ?></h2>
 		<form action='options.php' method='post'>
