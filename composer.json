@@ -1,0 +1,36 @@
+{
+  "name": "book-sync",
+  "type": "project",
+  "license": "GPL-3.0-or-later",
+  "require": {
+    "php": ">=7.0",
+    "oomphinc/composer-installers-extender": "*"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.*",
+    "wp-coding-standards/wpcs": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "config": {
+    "platform": {
+      "php": "7.0"
+    }
+  },
+  "extra": {
+    "installer-types": [
+      "library"
+    ],
+    "installer-paths": {
+      "content/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+    }
+  }
+}
