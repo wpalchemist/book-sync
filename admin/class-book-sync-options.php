@@ -126,7 +126,7 @@ class Book_Sync_Options {
 			'book_sync_settings',
 			'book_sync_settings_section',
 			array(
-				// translators: URL for finding user key on LibraryThing.com
+				// translators: URL for finding user key on LibraryThing.com.
 				sprintf( __( 'To find your LibraryThing user key, go to <a href="%s" target="_blank">LibraryThing</a>.  In the code on that page, you will see "key=XXXXXXXXXX": that is your user key.', 'book-sync' ), 'http://www.librarything.com/api/json.php' ),
 			)
 		);
@@ -136,7 +136,7 @@ class Book_Sync_Options {
 	/**
 	 * Display the Librarything username field
 	 *
-	 * @param $args array
+	 * @param array $args Field details.
 	 * @since 1.0.0
 	 */
 	public function librarything_username_render( $args ) {
@@ -150,7 +150,7 @@ class Book_Sync_Options {
 	/**
 	 * Display the LibraryThing user key field
 	 *
-	 * @param $args array
+	 * @param array $args Field details.
 	 * @since 1.0.0
 	 */
 	public function librarything_user_key_render( $args ) {
@@ -165,7 +165,7 @@ class Book_Sync_Options {
 	 * Sanitize the settings
 	 *
 	 * @since 1.0.0
-	 * @param $input array
+	 * @param array $input User input.
 	 * @return mixed
 	 */
 	private function sanitize_settings( $input ) {

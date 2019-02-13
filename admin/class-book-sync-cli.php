@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WP-CLI Commands.
  *
@@ -61,8 +60,6 @@ class Book_Sync_Cli extends WP_CLI_Command {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since      1.0.0
-	 * @param      string $plugin_name       The name of this plugin.
-	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct() {
 
@@ -70,7 +67,6 @@ class Book_Sync_Cli extends WP_CLI_Command {
 		$this->options     = $book_sync_options->get_options();
 
 	}
-
 
 	/**
 	 * Import books from LibraryThing or Goodreads.
@@ -83,8 +79,8 @@ class Book_Sync_Cli extends WP_CLI_Command {
 	 * : specify where to get books - LibraryThing or Goodreads.
 	 *
 	 * @since 1.0.0
-	 * @param $args array
-	 * @param $assoc_args array
+	 * @param array $args Command args.
+	 * @param array $assoc_args User-inputted args.
 	 */
 	public function import_books( $args, $assoc_args ) {
 		if ( 'LibraryThing' === $assoc_args['source'] ) {
@@ -133,7 +129,6 @@ class Book_Sync_Cli extends WP_CLI_Command {
 
 		$body = json_decode( $raw_books['body'] );
 		foreach ( $body->books as $book ) {
-			WP_CLI::debug( print_r( $book, true ) );
 			$books[ $book->book_id ] = array(
 				'lt_id'       => $book->book_id,
 				'title'       => $book->title,
@@ -149,6 +144,11 @@ class Book_Sync_Cli extends WP_CLI_Command {
 		return $books;
 	}
 
+	/**
+	 * Insert a post for a given book
+	 *
+	 * @param array $book_details Book info to be inserted.
+	 */
 	public function add_book( $book_details ) {
 		WP_CLI::line( 'Importing ' . $book_details['title'] );
 		// @todo Make sure the book doesn't already exist - if it does, update instead of insert
@@ -159,7 +159,7 @@ class Book_Sync_Cli extends WP_CLI_Command {
 		);
 		$new_book = wp_insert_post( $post, true );
 		if ( is_wp_error( $new_book ) ) {
-			WP_CLI::error( print_r( $new_book ) );
+			WP_CLI::error( $new_book );
 		} else {
 			WP_CLI::line( 'Created book with post id ' . $new_book );
 		}
