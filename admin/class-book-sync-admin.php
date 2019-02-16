@@ -160,4 +160,63 @@ class Book_Sync_Admin {
 
 	}
 
+	/**
+	 * Create metaboxes with CMB2
+	 */
+	public function define_metaboxes() {
+		$prefix = '_book_sync_';
+
+		$cmb = new_cmb2_box(
+			array(
+				'id'           => 'book_details',
+				'title'        => esc_attr__( 'Book Details', 'book-sync' ),
+				'object_types' => array( 'book' ),
+				'context'      => 'normal',
+				'priority'     => 'high',
+				'show_names'   => true,
+			)
+		);
+
+		$cmb->add_field(
+			array(
+				'name'       => esc_attr__( 'Rating', 'book-sync' ),
+				'id'         => $prefix . 'rating',
+				'type'       => 'text',
+				'attributes' => array(
+					'type' => 'number',
+					'min'  => 0,
+					'max'  => 5,
+				),
+			)
+		);
+
+		$cmb->add_field(
+			array(
+				'name' => esc_attr__( 'Publication Date', 'book-sync' ),
+				'id'   => $prefix . 'pub_date',
+				'type' => 'text',
+			)
+		);
+
+		$cmb->add_field(
+			array(
+				'name' => esc_attr__( 'ISBN', 'book-sync' ),
+				'id'   => $prefix . 'isbn',
+				'type' => 'text',
+			)
+		);
+
+		$cmb->add_field(
+			array(
+				'name'       => esc_attr__( 'LibraryThing Book ID', 'book-sync' ),
+				'id'         => $prefix . 'lt_id',
+				'type'       => 'text',
+				'attributes' => array(
+					'readonly' => 'readonly',
+					'disabled' => 'disabled',
+				),
+			)
+		);
+	}
+
 }

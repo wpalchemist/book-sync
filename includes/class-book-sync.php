@@ -172,6 +172,9 @@ class Book_Sync {
 		$this->loader->add_action( 'admin_menu', $plugin_options, 'menu_page' );
 		$this->loader->add_action( 'admin_init', $plugin_options, 'settings_init' );
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/lib/cmb2/init.php';
+		$this->loader->add_action( 'cmb2_admin_init', $plugin_admin, 'define_metaboxes' );
+
 	}
 
 	/**

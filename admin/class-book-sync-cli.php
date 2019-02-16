@@ -158,12 +158,17 @@ class Book_Sync_Cli extends WP_CLI_Command {
 			'post_content' => $book_details['review'],
 			'post_title'   => $book_details['title'],
 			'post_type'    => 'book',
+			'post_status'  => 'publish',
 		);
 		$new_book = wp_insert_post( $post, true );
 		if ( is_wp_error( $new_book ) ) {
 			WP_CLI::error( $new_book );
 		} else {
-			WP_CLI::line( 'Created book with post id ' . $new_book );
+			update_post_meta( $new_book, '_book_sync_rating', $book_details['rating'] );
+			update_post_meta( $new_book, '_book_sync_pub_date', $book_details['publication'] );
+			update_post_meta( $new_book, '_book_sync_isbn', $book_details['isbn'] );
+			update_post_meta( $new_book, '_book_sync_lt_id', $book_details['lt_id'] );
+			WP_CLI::line( '-- Created book with post id ' . $new_book );
 		}
 
 	}
