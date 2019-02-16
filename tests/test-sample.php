@@ -13,7 +13,7 @@ class BookSyncTest extends WP_UnitTestCase {
 	/**
 	 * A single example test.
 	 */
-	private function test_sample() {
+	public function test_sample() {
 		// Replace this with some actual testing code.
 		$this->assertTrue( true );
 	}
