@@ -77,20 +77,28 @@ class Book_Sync_Cli extends WP_CLI_Command {
 	 *
 	 * [--source=<source>]
 	 * : specify where to get books - LibraryThing or Goodreads.
+	 * [--number=<number>]
+	 * : specify number of books to import. If left blank, will default to 5000 to get all books.
 	 *
 	 * @since 1.0.0
 	 * @param array $args Command args.
 	 * @param array $assoc_args User-inputted args.
 	 */
 	public function import_books( $args, $assoc_args ) {
+		if ( ! isset( $assoc_args['number'] ) || '' === $assoc_args['number'] ) {
+			$number = 5000;
+		} else {
+			$number = $assoc_args['number'];
+		}
+
 		if ( 'LibraryThing' === $assoc_args['source'] ) {
 			WP_CLI::line( 'Importing books from LibraryThing' );
-			$book_list = $this->retrieve_books_from_librarything();
+			$book_list = $this->retrieve_books_from_librarything( $number );
 		} elseif ( 'Goodreads' === $assoc_args['source'] ) {
 			WP_CLI::line( 'Importing books from Goodreads' );
 			$book_list = 'tbd';
 		} else {
-			WP_CLI::error( 'invalid source' );
+			WP_CLI::error( 'Invalid Source: ' );
 			return;
 		}
 
@@ -102,10 +110,12 @@ class Book_Sync_Cli extends WP_CLI_Command {
 	/**
 	 * Get books from LibraryThing, and put them an an array we can use.
 	 *
+	 * @param int $number Number of books to retrieve.
+	 *
 	 * @since 1.0.0
 	 * @return array
 	 */
-	public function retrieve_books_from_librarything() {
+	public function retrieve_books_from_librarything( $number ) {
 		$books = array();
 
 		$userid = $this->options['librarything_username'];
@@ -120,8 +130,7 @@ class Book_Sync_Cli extends WP_CLI_Command {
 			die;
 		}
 
-		// @todo - change "max" to a really high number, or maybe make it a parameter
-		$raw_books = wp_remote_get( 'https://www.librarything.com/api_getdata.php?userid=' . $userid . '&key=' . $key . '&limit=review&max=5&reviewmax=10000&booksort=title&responseType=json&resultsets=books,bookratings&showReviews=1' );
+		$raw_books = wp_remote_get( 'https://www.librarything.com/api_getdata.php?userid=' . $userid . '&key=' . $key . '&limit=review&max=' . $number . '&reviewmax=10000&booksort=title&responseType=json&resultsets=books,bookratings&showReviews=1' );
 		if ( is_wp_error( $raw_books ) ) {
 			WP_CLI::error( $raw_books );
 			die;
@@ -154,12 +163,14 @@ class Book_Sync_Cli extends WP_CLI_Command {
 	public function add_book( $book_details ) {
 		WP_CLI::line( 'Importing ' . $book_details['title'] );
 		// @todo Make sure the book doesn't already exist - if it does, update instead of insert
-		$post     = array(
-			'post_content' => $book_details['review'],
-			'post_title'   => $book_details['title'],
-			'post_type'    => 'book',
-			'post_status'  => 'publish',
+		$post = array(
+			'post_title'  => $book_details['title'],
+			'post_type'   => 'book',
+			'post_status' => 'publish',
 		);
+		if ( isset( $book_details['review'] ) && '' !== $book_details['review'] ) {
+			$post['post_content'] = $book_details['review'];
+		}
 		$new_book = wp_insert_post( $post, true );
 		if ( is_wp_error( $new_book ) ) {
 			WP_CLI::error( $new_book );
