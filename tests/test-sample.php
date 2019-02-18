@@ -1,6 +1,6 @@
 <?php
 /**
- * Class SampleTest
+ * Class BookSyncTest
  *
  * @package Book_Sync
  */
@@ -8,12 +8,12 @@
 /**
  * Sample test case.
  */
-class SampleTest extends WP_UnitTestCase {
+class BookSyncTest extends WP_UnitTestCase {
 
 	/**
 	 * A single example test.
 	 */
-	private function test_sample() {
+	public function test_sample() {
 		// Replace this with some actual testing code.
 		$this->assertTrue( true );
 	}

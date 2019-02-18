@@ -38,11 +38,11 @@ jobs:
                 command: |
                     mkdir ~/php-codesniffer && curl -L https://github.com/squizlabs/PHP_CodeSniffer/archive/master.tar.gz | tar xz --strip-components=1 -C ~/php-codesniffer
             # Install phpunit
-#            - run:
-#                name: "Install PHPUnit"
-#                command: |
-#                    sudo wget -O /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-6.phar
-#                    sudo chmod +x /usr/local/bin/phpunit
+            - run:
+                name: "Install PHPUnit"
+                command: |
+                    sudo wget -O /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-6.phar
+                    sudo chmod +x /usr/local/bin/phpunit
             # Check out the code.
             - checkout
 
@@ -63,16 +63,16 @@ jobs:
                 name: "Run PHP Lint"
                 command: find -L ./ -name '*.php' -not -path './wordpress/*' -print0 | xargs -0 -n 1 -P 4 php -l > /dev/null
 
-#            - run:
-#                name: "Prepare test database"
-#                command: |
-#                    sudo mysql -uroot mysql -e "UPDATE user SET plugin='mysql_native_password' WHERE User='root'; FLUSH PRIVILEGES"
-#                    bash .bin/circleci/install-wp-tests.sh "wp_tests" "root" "" "127.0.0.1"
-#            - run:
-#                name: "Run PHPUnit"
-#                command: |
-#                    mkdir -p ~/phpunit
-#                    phpunit --log-junit ~/phpunit/junit.xml
+            - run:
+                name: "Prepare test database"
+                command: |
+                    sudo mysql -uroot mysql -e "UPDATE user SET plugin='mysql_native_password' WHERE User='root'; FLUSH PRIVILEGES"
+                    bash bin/install-wp-tests.sh "wp_tests" "root" "" "127.0.0.1"
+            - run:
+                name: "Run PHPUnit"
+                command: |
+                    mkdir -p ~/phpunit
+                    phpunit --log-junit ~/phpunit/junit.xml
             # Run phpcs
             - run:
                 name: "Run phpcs"
