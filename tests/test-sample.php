@@ -11,21 +11,28 @@
 class BookSyncTest extends WP_UnitTestCase {
 
 	/**
-	 * A single example test.
+	 * Test whether the Book CPT exists.
 	 */
-	public function text_book_cpt() {
-		$book = $this->factory->post->create( array( 'post_title' => 'Test Book', 'post_type' => 'book' ) );
+	public function test_book_cpt() {
+		$book = $this->factory->post->create(
+			array(
+				'post_title' => 'Test Book',
+				'post_type'  => 'book',
+			)
+		);
+		$test = false;
 
-		$query = new WP_Query( array(
-			's' => 'Test Book'
-		) );
-
-		$args = array(
-			'post_title' => 'Test Book'
+		$query = new WP_Query(
+			array(
+				's' => 'Test Book',
+			)
 		);
 
-		$posts = $query->query( $args );
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$test = get_the_id();
+		}
 
-		$this->assertEqualSets( array( $book ), wp_list_pluck( $posts, 'ID' ) );
+		$this->assertEquals( $book, $test );
 	}
 }
