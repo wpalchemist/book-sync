@@ -15,17 +15,17 @@ class BookSyncTest extends WP_UnitTestCase {
 	 */
 	public function test_book_cpt() {
 		$book = $this->factory->post->create( array( 'post_title' => 'Test Book', 'post_type' => 'book' ) );
+		$test = false;
 
 		$query = new WP_Query( array(
 			's' => 'Test Book'
 		) );
 
-		$args = array(
-			'post_title' => 'Test Book'
-		);
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$test = get_the_id();
+		}
 
-		$posts = $query->query( $args );
-
-		$this->assertEqualSets( array( $book ), wp_list_pluck( $posts, 'ID' ) );
+		$this->assertEqualSets( $book, $test );
 	}
 }
