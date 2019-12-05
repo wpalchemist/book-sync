@@ -26,6 +26,6 @@ class BookSyncTest extends WP_UnitTestCase {
 			$test = get_the_id();
 		}
 
-		$this->assertEqualSets( $book, $test );
+		$this->assertEquals( $book, $test );
 	}
 }
