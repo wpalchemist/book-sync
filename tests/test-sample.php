@@ -11,9 +11,9 @@
 class BookSyncTest extends WP_UnitTestCase {
 
 	/**
-	 * A single example test.
+	 * Test whether the Book CPT exists.
 	 */
-	public function text_book_cpt() {
+	public function test_book_cpt() {
 		$book = $this->factory->post->create( array( 'post_title' => 'Test Book', 'post_type' => 'book' ) );
 
 		$query = new WP_Query( array(
