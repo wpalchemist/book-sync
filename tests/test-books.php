@@ -41,39 +41,34 @@ class BookSyncTest extends WP_UnitTestCase {
 	 * Test saving and retrieving book meta data.
 	 */
 	public function test_book_meta() {
-		// get the most recent book.
-		$args = array(
-			'numberposts' => 1,
-			'post_type'   => 'book',
+		// create a book.
+		$book = $this->factory->post->create(
+			array(
+				'post_title' => 'Meta Test',
+				'post_type'  => 'book',
+			)
 		);
-		$book = get_posts( $args );
 
-		if ( ! $book ) {
-			$this->fail();
-		} else {
-			$this->assertTrue( true );
+		// list meta fields.
+		$fields = array(
+			'_book_sync_rating'   => 5,
+			'_book_sync_pub_date' => '2000',
+			'_book_sync_isbn'     => '0765336928',
+			'_book_sync_lt_id'    => '110378285',
+		);
+
+		// add meta fields to book.
+		foreach ( $fields as $key => $value ) {
+			update_post_meta( $book, $key, $value );
 		}
 
-//		// list meta fields.
-//		$fields = array(
-//			'_book_sync_rating'   => 5,
-//			'_book_sync_pub_date' => '2000',
-//			'_book_sync_isbn'     => '0765336928',
-//			'_book_sync_lt_id'    => '110378285',
-//		);
-//
-//		// add meta fields to book.
-//		foreach ( $fields as $key => $value ) {
-//			update_post_meta( $book[0]->ID, $key, $value );
-//		}
-//
-//		// retrieve meta fields from book.
-//		$retrieved_fields = array();
-//		foreach ( $fields as $key => $value ) {
-//			$retrieved_fields[ $key ] = get_post_meta( $book[0]->ID, $key, true );
-//		}
-//
-//		// make sure retrieved data is what we expect.
-//		$this->assertEquals( $fields, $retrieved_fields );
+		// retrieve meta fields from book.
+		$retrieved_fields = array();
+		foreach ( $fields as $key => $value ) {
+			$retrieved_fields[ $key ] = get_post_meta( $book, $key, true );
+		}
+
+		// make sure retrieved data is what we expect.
+		$this->assertEquals( $fields, $retrieved_fields );
 	}
 }
