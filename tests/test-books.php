@@ -62,7 +62,7 @@ class BookSyncTest extends WP_UnitTestCase {
 
 		// add meta fields to book.
 		foreach ( $fields as $key => $value ) {
-			add_post_meta( $book[0]->ID, $key, $value );
+			update_post_meta( $book[0]->ID, $key, $value );
 		}
 
 		// retrieve meta fields from book.
