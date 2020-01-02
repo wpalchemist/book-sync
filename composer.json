@@ -7,8 +7,7 @@
     "oomphinc/composer-installers-extender": "*"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "3.*",
-    "polevaultweb/phpunit-wp-cli-runner": "master@dev"
+    "squizlabs/php_codesniffer": "3.*"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

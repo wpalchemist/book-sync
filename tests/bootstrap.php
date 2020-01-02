@@ -13,10 +13,6 @@ if ( ! $_tests_dir ) {
 // Give access to tests_add_filter() function.
 require_once $_tests_dir . '/includes/functions.php';
 
-// Load CLI Test Runner.
-$vendorDir = plugin_dir_path( dirname( __FILE__ ) ) . 'vendor';
-\Polevaultweb\PHPUnit_WP_CLI_Runner\Runner::init( $vendorDir );
-
 /**
  * Manually load the plugin being tested.
  */
