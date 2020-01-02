@@ -14,7 +14,7 @@ if ( ! $_tests_dir ) {
 require_once $_tests_dir . '/includes/functions.php';
 
 // Load CLI Test Runner.
-$vendorDir = 'vendor/';
+$vendorDir = plugin_dir_path( dirname( __FILE__ ) ) . 'vendor';
 \Polevaultweb\PHPUnit_WP_CLI_Runner\Runner::init( $vendorDir );
 
 /**
