@@ -1,3 +1,7 @@
 [submodule "admin/lib/cmb2"]
 	path = admin/lib/cmb2
 	url = https://github.com/CMB2/CMB2
+
+[submodule "vendor/polevaultweb/phpunit-wp-cli-runner"]
+    path = vendor/polevaultweb/phpunit-wp-cli-runner
+    url = https://github.com/polevaultweb/phpunit-wp-cli-runner
