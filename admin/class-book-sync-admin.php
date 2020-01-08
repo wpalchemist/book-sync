@@ -204,7 +204,8 @@ class Book_Sync_Admin {
 			)
 		);
 
-		$cmb->add_group_field( $dates_read,
+		$cmb->add_group_field(
+			$dates_read,
 			array(
 				'name' => esc_html__( 'Date Started', 'book-sync' ),
 				'id'   => 'start',
@@ -212,7 +213,8 @@ class Book_Sync_Admin {
 			)
 		);
 
-		$cmb->add_group_field( $dates_read,
+		$cmb->add_group_field(
+			$dates_read,
 			array(
 				'name' => esc_html__( 'Date Finished', 'book-sync' ),
 				'id'   => 'finish',
@@ -275,7 +277,6 @@ class Book_Sync_Admin {
 				),
 			)
 		);
-
 
 	}
 
