@@ -196,10 +196,10 @@ class Book_Sync_Admin {
 				'type'        => 'group',
 				'description' => esc_html__( 'Reading Dates', 'book-sync' ),
 				'options'     => array(
-					'group_title'       => esc_html__( 'Reading Dates {#}', 'book-sync' ),
-					'add_button'        => esc_html__( 'Add More Dates', 'book-sync' ),
-					'remove_button'     => esc_html__( 'Remove Dates', 'book-sync' ),
-					'sortable'          => false,
+					'group_title'   => esc_html__( 'Reading Dates {#}', 'book-sync' ),
+					'add_button'    => esc_html__( 'Add More Dates', 'book-sync' ),
+					'remove_button' => esc_html__( 'Remove Dates', 'book-sync' ),
+					'sortable'      => false,
 				),
 			)
 		);
