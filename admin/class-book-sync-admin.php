@@ -169,7 +169,7 @@ class Book_Sync_Admin {
 		$cmb = new_cmb2_box(
 			array(
 				'id'           => 'book_details',
-				'title'        => esc_attr__( 'Book Details', 'book-sync' ),
+				'title'        => esc_html__( 'Book Details', 'book-sync' ),
 				'object_types' => array( 'book' ),
 				'context'      => 'normal',
 				'priority'     => 'high',
@@ -179,7 +179,7 @@ class Book_Sync_Admin {
 
 		$cmb->add_field(
 			array(
-				'name'       => esc_attr__( 'Rating', 'book-sync' ),
+				'name'       => esc_html__( 'Rating', 'book-sync' ),
 				'id'         => $prefix . 'rating',
 				'type'       => 'text',
 				'attributes' => array(
@@ -190,9 +190,57 @@ class Book_Sync_Admin {
 			)
 		);
 
+		$dates_read = $cmb->add_field(
+			array(
+				'id'          => $prefix . 'dates_read',
+				'type'        => 'group',
+				'description' => esc_html__( 'Reading Dates', 'book-sync' ),
+				'options'     => array(
+					'group_title'   => esc_html__( 'Reading Dates {#}', 'book-sync' ),
+					'add_button'    => esc_html__( 'Add More Dates', 'book-sync' ),
+					'remove_button' => esc_html__( 'Remove Dates', 'book-sync' ),
+					'sortable'      => false,
+				),
+			)
+		);
+
+		$cmb->add_group_field(
+			$dates_read,
+			array(
+				'name' => esc_html__( 'Date Started', 'book-sync' ),
+				'id'   => 'start',
+				'type' => 'text_date_timestamp',
+			)
+		);
+
+		$cmb->add_group_field(
+			$dates_read,
+			array(
+				'name' => esc_html__( 'Date Finished', 'book-sync' ),
+				'id'   => 'finish',
+				'type' => 'text_date_timestamp',
+			)
+		);
+
 		$cmb->add_field(
 			array(
-				'name' => esc_attr__( 'Publication Date', 'book-sync' ),
+				'name'             => esc_html__( 'Format', 'book-sync' ),
+				'id'               => $prefix . 'format',
+				'type'             => 'select',
+				'show_option_none' => true,
+				'options'          => array(
+					'paperback' => esc_html__( 'Paperback', 'book-sync' ),
+					'hardcover' => esc_html__( 'Hardcover', 'book-sync' ),
+					'ebook'     => esc_html__( 'Ebook', 'book-sync' ),
+					'audiobook' => esc_html__( 'Audiobook', 'book-sync' ),
+					'other'     => esc_html__( 'Other', 'book-sync' ),
+				),
+			)
+		);
+
+		$cmb->add_field(
+			array(
+				'name' => esc_html__( 'Publication Date', 'book-sync' ),
 				'id'   => $prefix . 'pub_date',
 				'type' => 'text',
 			)
@@ -200,7 +248,7 @@ class Book_Sync_Admin {
 
 		$cmb->add_field(
 			array(
-				'name' => esc_attr__( 'ISBN', 'book-sync' ),
+				'name' => esc_html__( 'ISBN', 'book-sync' ),
 				'id'   => $prefix . 'isbn',
 				'type' => 'text',
 			)
@@ -208,7 +256,7 @@ class Book_Sync_Admin {
 
 		$cmb->add_field(
 			array(
-				'name'       => esc_attr__( 'LibraryThing Book ID', 'book-sync' ),
+				'name'       => esc_html__( 'LibraryThing Book ID', 'book-sync' ),
 				'id'         => $prefix . 'lt_id',
 				'type'       => 'text',
 				'attributes' => array(
@@ -217,6 +265,19 @@ class Book_Sync_Admin {
 				),
 			)
 		);
+
+		$cmb->add_field(
+			array(
+				'name'       => esc_html__( 'Goodreads Book ID', 'book-sync' ),
+				'id'         => $prefix . 'gr_id',
+				'type'       => 'text',
+				'attributes' => array(
+					'readonly' => 'readonly',
+					'disabled' => 'disabled',
+				),
+			)
+		);
+
 	}
 
 }
